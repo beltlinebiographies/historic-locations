@@ -1,0 +1,15 @@
+@import 'exhibit.scss';
+@import 'google-map.scss';
+@import 'main-console.scss';
+
+html, body{
+  height:100%;
+  .liquid-container, .liquid-child ,.google-map, .ember-view {
+    height:100%;
+  }
+}
+
+.col-xs-6, .col-sm-6 {
+  margin: 0;
+  padding: 0;
+}

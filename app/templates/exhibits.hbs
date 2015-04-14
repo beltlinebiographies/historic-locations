@@ -1,0 +1,7 @@
+<ul>
+  {{#each exhibit in exhibits}}
+    <li>{{link-to exhibit.title 'exhibits.show' exhibit.id}}</li>
+  {{/each}}
+</ul>
+
+{{liquid-outlet}}
