@@ -3,10 +3,13 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   classNames: ['google-map'],
 
+  styles: [{"featureType":"landscape.natural","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#e0efef"}]},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"hue":"#1900ff"},{"color":"#c0e8e8"}]},{"featureType":"road","elementType":"geometry","stylers":[{"lightness":100},{"visibility":"simplified"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"visibility":"on"},{"lightness":700}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#7dcdcd"}]}],
+
   buildMap: function () {
     var mapOptions = {
       zoom: 14,
-      center: new google.maps.LatLng(33.767430, -84.360744)
+      center: new google.maps.LatLng(33.767430, -84.360744),
+      styles: this.get('styles')
     };
 
     var elementId = document.getElementById(this.get('elementId'));
@@ -40,6 +43,7 @@ export default Ember.Component.extend({
   currentLocation: function () {
     var component = this;
     if ("geolocation" in navigator) {
+
       function geo_success(position) {
         var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
         var marker = new google.maps.Marker({
@@ -50,7 +54,7 @@ export default Ember.Component.extend({
       }
 
       function geo_error() {
-        alert("Sorry, no position available.");
+        console.log("Sorry, no position available.");
       }
 
       var geo_options = {
@@ -61,7 +65,7 @@ export default Ember.Component.extend({
 
       var wpid = navigator.geolocation.watchPosition(geo_success, geo_error, geo_options);
     } else {
-      console.log('This is not going to work well without giving your location.');
+      alert('This is not going to work well without giving your location.');
     }
   }
 });
